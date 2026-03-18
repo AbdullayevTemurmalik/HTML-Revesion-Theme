@@ -5,12 +5,18 @@ const resultsDiv = document.getElementById("results");
 const menuButtons = document.querySelectorAll(".menu-btn");
 const mainLogo = document.getElementById("mainLogo");
 
+/**
+ * Natijalarni ekranga chiqarish funksiyasi
+ */
 function displayResults(data, term = "") {
   resultsDiv.innerHTML = "";
 
   if (data.length === 0) {
-    resultsDiv.innerHTML =
-      "<p class='no-result' style='width:100%; text-align:center;'>Hech narsa topilmadi...</p>";
+    resultsDiv.innerHTML = `
+      <div class="no-result" style="width:100%; text-align:center; padding: 50px;">
+        <i class='bx bx-search-alt' style='font-size: 3rem; color: #64748b;'></i>
+        <p style="color: #64748b; margin-top: 10px;">Hech narsa topilmadi...</p>
+      </div>`;
     return;
   }
 
@@ -18,6 +24,7 @@ function displayResults(data, term = "") {
     const card = document.createElement("div");
     card.className = "card";
 
+    // Qidirilgan so'zni ajratib ko'rsatish (Highlight)
     const highlight = (text) => {
       if (!term || term.trim() === "") return text;
       const regex = new RegExp(`(${term})`, "gi");
@@ -35,50 +42,81 @@ function displayResults(data, term = "") {
   });
 }
 
+/**
+ * Qidiruv va Filtratsiya logikasi
+ */
 function handleSearch(term) {
+  const normalizedTerm = term.toLowerCase().trim();
+
   const filtered = htmlData.filter((item) => {
     return (
-      item.title.toLowerCase().includes(term) ||
-      item.reja.toLowerCase().includes(term) ||
-      item.vazifa.toLowerCase().includes(term)
+      item.title.toLowerCase().includes(normalizedTerm) ||
+      item.category.toLowerCase().includes(normalizedTerm) || // Kategoriya bo'yicha qidiruv qo'shildi
+      item.reja.toLowerCase().includes(normalizedTerm) ||
+      item.vazifa.toLowerCase().includes(normalizedTerm)
     );
   });
-  displayResults(filtered, term);
+
+  displayResults(filtered, normalizedTerm);
 }
 
-// Menyu tugmalari
+/**
+ * Menyu tugmalari (Category Filter)
+ */
 menuButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
+    // Oldingi active tugmani o'chirish va yangisini yoqish
     document.querySelector(".menu-btn.active")?.classList.remove("active");
     btn.classList.add("active");
+
     const category = btn.getAttribute("data-category");
 
     if (category === "all") {
-      searchInput.value = "";
-      displayResults(htmlData, "");
+      searchInput.value = ""; // Qidiruvni tozalash
+      displayResults(htmlData, ""); // Hamma ma'lumotni chiqarish
     } else {
-      searchInput.value = category;
-      handleSearch(category.toLowerCase());
+      searchInput.value = category; // Tanlangan kategoriyani inputga yozish
+      handleSearch(category); // Filtrni ishga tushirish
     }
   });
 });
 
-// Qidiruv maydoni
+/**
+ * Qidiruv maydoniga yozganda ishlaydi
+ */
 searchInput.addEventListener("input", (e) => {
-  const term = e.target.value.toLowerCase().trim();
-  if (term === "") {
+  const term = e.target.value;
+
+  // Agar input bo'shatilsa, "Hammasi" tugmasini active qilish
+  if (term.trim() === "") {
+    document.querySelector(".menu-btn.active")?.classList.remove("active");
+    document.querySelector('[data-category="all"]').classList.add("active");
     displayResults(htmlData, "");
   } else {
     handleSearch(term);
   }
 });
 
-// Logo bosilganda
+/**
+ * Logotip bosilganda hammasini asl holiga qaytarish
+ */
 mainLogo.addEventListener("click", () => {
   searchInput.value = "";
+  document.querySelector(".menu-btn.active")?.classList.remove("active");
+  document.querySelector('[data-category="all"]').classList.add("active");
   displayResults(htmlData, "");
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// Sayt yuklanganda hammasini ko'rsatish
-displayResults(htmlData, "");
+/**
+ * Sayt ilk bor ochilganda
+ */
+function init() {
+  // "Hammasi" tugmasini active qilib qo'yamiz
+  const allBtn = document.querySelector('[data-category="all"]');
+  if (allBtn) allBtn.classList.add("active");
+
+  displayResults(htmlData, "");
+}
+
+init();
