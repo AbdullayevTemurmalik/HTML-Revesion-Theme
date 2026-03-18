@@ -1,0 +1,309 @@
+/* Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #020617; /* JS bilan bir xil to'q fon */
+  color: #f1f5f9;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  line-height: 1.6;
+}
+
+/* --- NAVBAR (JS bilan bir xil Glassmorphism) --- */
+.navbar {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid #1e293b;
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Logo Dizayni */
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.logo-wrapper:hover {
+  transform: scale(1.05);
+}
+
+.html-icon {
+  background: #e34f26; /* HTML rasmiy rangi */
+  color: #fff;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(227, 79, 38, 0.3);
+}
+
+.logo-name {
+  color: #f8fafc;
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: -0.5px;
+}
+
+/* --- CATEGORY MENU --- */
+.category-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.menu-btn {
+  background: #1e293b;
+  color: #94a3b8;
+  border: 1px solid #334155;
+  padding: 8px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.menu-btn:hover {
+  border-color: #e34f26;
+  color: #f8fafc;
+  background: rgba(227, 79, 38, 0.05);
+}
+
+.menu-btn.active {
+  background: #e34f26;
+  color: #fff;
+  border-color: #e34f26;
+  box-shadow: 0 4px 15px rgba(227, 79, 38, 0.3);
+}
+
+/* GitHub Link */
+.github-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #94a3b8;
+  background: #1e293b;
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  transition: 0.3s;
+}
+
+.github-link:hover {
+  border-color: #38bdf8;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
+}
+
+/* --- MAIN CONTENT --- */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: #f8fafc;
+  letter-spacing: -1px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #64748b;
+  margin-bottom: 40px;
+  font-size: 1.1rem;
+}
+
+/* Search Input (JS bilan bir xil effekt) */
+#searchInput {
+  width: 100%;
+  padding: 18px 26px;
+  border-radius: 20px;
+  border: 1px solid #1e293b;
+  background: #0f172a;
+  color: white;
+  font-size: 1.1rem;
+  outline: none;
+  margin-bottom: 50px;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+#searchInput:focus {
+  border-color: #e34f26;
+  background: #1e293b;
+  box-shadow: 0 0 0 4px rgba(227, 79, 38, 0.15);
+}
+
+/* --- RESULTS (FLEXBOX GRID) --- */
+#results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+/* Card Dizayni */
+.card {
+  background: #1e293b;
+  padding: 28px;
+  border-radius: 24px;
+  border: 1px solid #334155;
+  flex: 1 1 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  border-color: #e34f26;
+  background: #243353;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.card h3 {
+  color: #e34f26;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge {
+  font-size: 0.75rem;
+  background: rgba(227, 79, 38, 0.1);
+  color: #e34f26;
+  padding: 5px 12px;
+  border-radius: 30px;
+  border: 1px solid rgba(227, 79, 38, 0.2);
+  font-weight: 600;
+}
+
+.card p {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+
+.card .reja {
+  color: #e2e8f0;
+  font-weight: 600;
+  padding-left: 12px;
+  border-left: 3px solid #e34f26;
+  margin-bottom: 12px;
+}
+
+.card .vazifa {
+  background: rgba(16, 185, 129, 0.08);
+  color: #10b981;
+  padding: 10px 15px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+/* Kod Bloki */
+.card pre {
+  background: #000;
+  padding: 20px;
+  border-radius: 16px;
+  overflow-x: auto;
+  border: 1px solid #1e293b;
+  margin-top: auto;
+}
+
+.card code {
+  font-family: "JetBrains Mono", monospace;
+  color: #fb7185;
+  font-size: 0.9rem;
+}
+
+/* Highlight */
+mark {
+  background: rgba(227, 79, 38, 0.4);
+  color: #fff;
+  border-radius: 4px;
+  padding: 0 3px;
+}
+
+/* --- RESPONSIVE --- */
+
+@media (min-width: 768px) {
+  .card {
+    flex: 1 1 calc(50% - 24px);
+  }
+}
+
+@media (min-width: 1200px) {
+  .card {
+    flex: 1 1 calc(25% - 24px);
+  }
+}
+
+@media (max-width: 900px) {
+  .nav-container {
+    flex-direction: column;
+    padding: 20px;
+    gap: 15px;
+  }
+
+  .category-menu {
+    order: 3;
+    width: 100%;
+  }
+
+  .github-link {
+    order: 2;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+  .card {
+    padding: 20px;
+  }
+}

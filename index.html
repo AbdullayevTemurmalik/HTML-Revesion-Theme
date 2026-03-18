@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://cdn-icons-png.flaticon.com/512/732/732212.png"
+    />
+    <title>HTML Revision | TemurMalik</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="nav-container">
+        <div class="logo-wrapper" id="mainLogo">
+          <div class="html-icon">H</div>
+          <span class="logo-name">HTML</span>
+        </div>
+
+        <div class="category-menu">
+          <button class="menu-btn active" data-category="all">Hammasi</button>
+          <button class="menu-btn" data-category="Kirish">Kirish</button>
+          <button class="menu-btn" data-category="Tag va Attribute">
+            Tag va Attribute
+          </button>
+          <button class="menu-btn" data-category="CSS kirish">
+            CSS Kirish
+          </button>
+          <button class="menu-btn" data-category="Block va Inline">
+            Block/Inline
+          </button>
+          <button class="menu-btn" data-category="ID va Class">
+            ID & Class
+          </button>
+          <button class="menu-btn" data-category="Media">Media</button>
+          <button class="menu-btn" data-category="Table">Table</button>
+          <button class="menu-btn" data-category="Form">Form</button>
+          <button class="menu-btn" data-category="Link">Link</button>
+          <button class="menu-btn" data-category="Semantic">Semantic</button>
+          <button class="menu-btn" data-category="Amaliyot">Amaliyot</button>
+          <button class="menu-btn" data-category="Imtihon">Imtihon</button>
+        </div>
+
+        <a
+          href="https://github.com/AbdullayevTemurmalik"
+          target="_blank"
+          class="github-link"
+        >
+          <i class="bx bxl-github"></i>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="container">
+      <h1>HTML darslari rejasini ko'zdan kechiring</h1>
+      <p class="subtitle">Mavzular, reja va amaliy vazifalar jamlanmasi</p>
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Mavzu yoki kalit so'zni yozing..."
+      />
+
+      <div id="results"></div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
