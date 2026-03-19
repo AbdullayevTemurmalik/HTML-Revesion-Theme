@@ -31,12 +31,25 @@ function displayResults(data, term = "") {
       return text.replace(regex, (match) => `<mark>${match}</mark>`);
     };
 
+    // HAR BIR KARTOCKA ICHIDAGI STRUKTURA (KOD VA NATIJA BILAN)
     card.innerHTML = `
             <h3>${highlight(item.title)} <span class="badge">${item.category}</span></h3>
             <p>${item.desc}</p>
-            <p class="reja"><strong>📌 Reja:</strong> ${item.reja}</p>
-            <p class="vazifa"><strong>📝 Vazifa:</strong> ${item.vazifa}</p>
-            <pre><code>${item.example}</code></pre>
+            
+            <div class="code-box" style="margin-top:20px;">
+                <span style="font-size:12px; color:#94a3b8; display:block; margin-bottom:8px;">💻 Kod:</span>
+                <pre style="background:#000; padding:20px; border-radius:12px; border:1px solid #1e293b; overflow-x:auto;"><code style="color:#fb7185; font-family:'JetBrains Mono', monospace; font-size:14px; line-height:1.5;">${item.code}</code></pre>
+            </div>
+
+            <div class="result-box" style="margin-top:20px; margin-bottom:20px;">
+                <span style="font-size:12px; color:#94a3b8; display:block; margin-bottom:8px;">👀 Natija:</span>
+                <div style="background:white; color:black; padding:15px; border-radius:10px; border:2px dashed #e34f26; min-height:40px;">
+                    ${item.result}
+                </div>
+            </div>
+
+            <p class="reja" style="margin-top:10px;"><strong>📌 Reja:</strong> ${item.reja}</p>
+            <p class="vazifa" style="color:#10b981;"><strong>📝 Vazifa:</strong> ${item.vazifa}</p>
         `;
     resultsDiv.appendChild(card);
   });
@@ -51,7 +64,7 @@ function handleSearch(term) {
   const filtered = htmlData.filter((item) => {
     return (
       item.title.toLowerCase().includes(normalizedTerm) ||
-      item.category.toLowerCase().includes(normalizedTerm) || // Kategoriya bo'yicha qidiruv qo'shildi
+      item.category.toLowerCase().includes(normalizedTerm) ||
       item.reja.toLowerCase().includes(normalizedTerm) ||
       item.vazifa.toLowerCase().includes(normalizedTerm)
     );
@@ -65,18 +78,17 @@ function handleSearch(term) {
  */
 menuButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
-    // Oldingi active tugmani o'chirish va yangisini yoqish
     document.querySelector(".menu-btn.active")?.classList.remove("active");
     btn.classList.add("active");
 
     const category = btn.getAttribute("data-category");
 
     if (category === "all") {
-      searchInput.value = ""; // Qidiruvni tozalash
-      displayResults(htmlData, ""); // Hamma ma'lumotni chiqarish
+      searchInput.value = "";
+      displayResults(htmlData, "");
     } else {
-      searchInput.value = category; // Tanlangan kategoriyani inputga yozish
-      handleSearch(category); // Filtrni ishga tushirish
+      searchInput.value = category;
+      handleSearch(category);
     }
   });
 });
@@ -87,7 +99,6 @@ menuButtons.forEach((btn) => {
 searchInput.addEventListener("input", (e) => {
   const term = e.target.value;
 
-  // Agar input bo'shatilsa, "Hammasi" tugmasini active qilish
   if (term.trim() === "") {
     document.querySelector(".menu-btn.active")?.classList.remove("active");
     document.querySelector('[data-category="all"]').classList.add("active");
@@ -112,10 +123,8 @@ mainLogo.addEventListener("click", () => {
  * Sayt ilk bor ochilganda
  */
 function init() {
-  // "Hammasi" tugmasini active qilib qo'yamiz
   const allBtn = document.querySelector('[data-category="all"]');
   if (allBtn) allBtn.classList.add("active");
-
   displayResults(htmlData, "");
 }
 
